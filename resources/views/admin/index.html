@@ -1,0 +1,239 @@
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+       
+        <h3 class="text-center">List Of Tutor</h3>
+         <table id="example" class="table table-striped" cellspacing="0" width="100%">
+             <thead>
+               <tr>
+                 <th class="th-sm">Profile</th>
+                 <th class="th-sm">Name</th>
+                 <th class="th-sm">position</th>
+                 <th class="th-sm">Email</th>
+                 <th class="th-sm">address</th>
+                 <th class="th-sm">Action</th>
+               </tr>
+             </thead>
+             <tbody>
+                 @foreach ($tutors as $tutors)
+                     @if ($tutors->role->id != 1)
+                     <tr>
+                         <td>
+                             <a href="#">
+                                 <img class="profile-image" src="{{asset('templete/images/icon.png')}}" width="40" height="40" style="border-radius: 50%;" alt="User" />
+                             </a>
+                         </td>
+                         <td>{{$tutors->first_name}}  {{$tutors->last_name}}</td>
+                         <td>{{$tutors->position}}</td>
+                         <td>{{$tutors->email}}</td>
+                         <td>{{$tutors->address}}</td>
+                         <td>
+                             <a class="text-light" tabindex="-1" type="button" data-toggle="modal" data-backdrop="false" aria-hidden="true" data-target="#exampleModal" href="#"><i class="material-icons">delete</i></a>
+                               <!-- Modal -->
+                                 <div class="modal fade modal-open" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                     <div class="modal-dialog" role="document">
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                         </button>
+                                         </div>
+                                         <div class="modal-body">
+                                         </div>
+                                         <div class="modal-footer">
+                                             <form method="POST" action="{{route('admin.tutor.destroy',$tutors->id)}}">
+                                                 @csrf
+                                                 @method('DELETE')
+                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                 <button type="submit" class="btn btn-primary">Delete</button>
+                                             </form>
+                                         </div>
+                                     </div>
+                                     </div>
+                                 </div>
+                                
+                         </td>
+                     </tr>
+                     @endif
+                 @endforeach
+             </tbody>
+             <tfoot>
+               <tr>
+                 <th class="th-sm">Profile</th>
+                 <th class="th-sm">Name</th>
+                 <th class="th-sm">position</th>
+                 <th class="th-sm">Email</th>
+                 <th class="th-sm">address</th>
+                 <th class="th-sm">Action</th>
+               </tr>
+             </tfoot>
+           </table>
+
+           <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+           <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+           <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+           <script>
+              
+              $('#example').dataTable({
+               "bPaginate": true,
+               "bLengthChange": false,
+               "bFilter": true,
+               "bInfo": false,
+               "bAutoWidth": false });
+               
+           </script>
+        </div>
+    </div>
+ </div>
+
+
+
+
+
+ <h3 class="text-center" >Archive list</h3>
+          
+              
+ 
+
+
+
+ <h3 class="text-center">List Student In Follow up</h3>
+             <table id="example" class="table table-striped" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th class="th-sm">Profile</th>
+                  <th class="th-sm">Name</th>
+                  <td class="th-sm">Tutor</td>
+                  <th class="th-sm">Class</th>
+                  <th class="th-sm">Status</th>
+                  <th class="th-sm">Student_ID</th>
+                  <th class="th-sm">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($students as $student)
+                    @if ($student->status == 1)
+                    <tr class="bg-info">
+                      <td><img src="{{asset('img_student/'.$student->picture)}}" width="40" style="border-radius: 25px;" height="40" alt="User" /></td>
+                      <td>{{$student->first_name}} {{$student->last_name}}</td>
+                      <td>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" style="cursor:pointer" type="button" id="menu1" data-toggle="dropdown">Add Tutor
+                            <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                <div class="input-group mb-3 input-group-sm">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text">Small</span>
+                                   </div>
+                                   <input type="text" class="form-control">
+                                 </div>
+                              <li style="cursor:pointer" role="presentation"><a role="menuitem" tabindex="-1" href="#">Follow Up</a></li>
+                            </ul>  
+                      </td>
+                      <td>{{$student->class}}</td>
+                      <td>
+                        <div class="dropdown">
+                        <a class="dropdown-toggle" style="cursor:pointer" type="button" id="menu1" data-toggle="dropdown">Achive
+                        <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                          <li style="cursor:pointer" role="presentation"><a role="menuitem" tabindex="-1" href="#">Follow Up</a></li>
+                        </ul>  
+                      </div>
+                      </td>
+                      <td>{{$student->student_id}}</td>
+                      <td>
+                        <a href="#"><span class="material-icons">edit</span></a> 
+                        <a href="#"><span class="material-icons">delete</span></a>
+                        <a href="#"><span class="material-icons">visibility</span></a> 
+                      </td>
+                </tr>
+                    @endif
+                @endforeach
+
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th class="th-sm">Profile</th>
+                  <th class="th-sm">Name</th>
+                  <td class="th-sm">Tutor</td>
+                  <th class="th-sm">Class</th>
+                  <th class="th-sm">Status</th>
+                  <th class="th-sm">Student_ID</th>
+                  <th class="th-sm">Action</th>
+                </tr>
+              </tfoot>
+            </table>
+
+
+            <section>
+              <div class="main-panel">
+                <div class="content">
+                  <div class="container-fluid">
+                    <h4 class="page-title">Add New Student</h4>
+                    <form  action="{{route('admin.followUpStudent.store')}}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      @method('POST')
+                      <div class="form-row">
+                          <div class="col form-group">
+                              <label>First name </label>   
+                                <input type="text" class="form-control" name="first_name" required>
+                          </div> <!-- form-group end.// -->
+          
+                          <div class="col form-group">
+                              <label>Last name</label>
+                                <input type="text" class="form-control" name="last_name" required>
+                          </div> <!-- form-group end.// -->
+                      </div> <!-- form-row end.// -->
+          
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <label>Class</label>
+                              <input type="text" class="form-control" name="class" required>
+                            </div> <!-- form-group end.// -->
+                          <div class="form-group col-md-6">
+                            <label>Student_ID</label>
+                            <input type="text" class="form-control" name="student_id" required>
+                          </div> <!-- form-group end.// -->
+                      </div> <!-- form-row.// -->
+          
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <div class="form-group">
+                                  <label for="gender">Gender</label>
+                                  <input class="form-control" type="text" name="gender" required>
+                                  {{-- <input class="form-control" type="text" name="gender" required> --}}
+                              </div> <!-- form-group end.// -->  
+                          </div>
+                          <div class="form-group col-md-6">
+                              <div class="form-group">
+                                  <label for="year">Year</label>
+                                  <input class="form-control" type="number" name="year" required>
+                              </div> <!-- form-group end.// -->  
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="province">Province</label>
+                          <input class="form-control" type="text" name="province" required>
+                      </div> <!-- form-group end.// -->  
+          
+                      <div class="form-group">
+                          <label for="gender">Choose Picture</label>
+                          <input type="file" name="picture" required>
+                      </div> <!-- form-group end.// -->  
+          
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-primary btn-block"> Create New  </button>
+                      </div> <!-- form-group// -->      
+                      <small class="text-muted">By clicking the 'Create' button, your application will create a new student</small>                                          
+                  </form>
+                  </div>
+                </div>	
+              </div>
+            </section>
+          </body>
+          </html>
