@@ -18,7 +18,7 @@ class AddUserIdToStudentsTable extends Migration
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users')
-                    ->onDelete('cascade');
+                    ->onDelete('set null');
         });
     }
 

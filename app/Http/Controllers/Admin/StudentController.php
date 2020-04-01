@@ -7,6 +7,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use File;
+use PHPUnit\Framework\MockObject\Builder\Stub;
+
 class StudentController extends Controller
 {
     /**
@@ -121,19 +123,40 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request,$id)
     {
-        //
+        // 
     }
 
+    public function updateStudent(Request $request, $id){
+        $student = Student::find($id);
+        $student -> first_name = $request -> get('first_name');
+        $student -> last_name = $request -> get('last_name');
+        $student -> gender = $request -> get('gender');
+        $student -> year = $request -> get('year');
+        $student -> province = $request -> get('province');
+        $student -> student_id = $request -> get('student_id');
+        $student ->  class = $request -> get('class');
+        $student -> save();
+        return redirect('admin/achiveStudent');
+
+    }
+
+
+    public function showFormEditStudent($id){
+        $student = Student::find($id);
+        return view('admin.editStudent')->with('student',$student);
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        $student -> delete();
+        return back();
     }
 }

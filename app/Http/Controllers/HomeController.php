@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $id = 1;
+        return view('admin.dashboard')->with('id',$id);
     }
 }

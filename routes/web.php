@@ -19,6 +19,10 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::resource('tutor','TutorController');
 
     Route::resource('student','StudentController');
+
+    Route::PUT('updateStudent/{id}','StudentController@updateStudent')->name('updateStudent');
+
+    Route::get('showFormEditStudent\{id}','StudentController@showFormEditStudent')->name('showFormEditStudent');
     
     Route::PUT('statusAchive/{id}','StudentController@updateStatusAchive')->name('statusAchive');
 
@@ -36,12 +40,14 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
 
     Route::get('showAddStudent','StudentController@showAddStudent')->name('showAddStudent');
 
- 
+    Route::PUT('changeProfilePicture','TutorController@changeProfilePicture')->name('changeProfilePicture');
+
 });
 Route::group(['as'=>'author.','prefix'=>'author','namespace'=>'Author','middleware'=>['auth','author']], function (){
 
     Route::get('dashboard','DashboardController@index')->name('dashboard');
 
+    Route::PUT('changeProfilePicture','TutorController@changeProfilePicture')->name('changeProfilePicture');
 });
 
 

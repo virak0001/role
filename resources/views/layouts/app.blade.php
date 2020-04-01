@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand" style="font-family: 'Roboto', sans-serif;">
-                    <img src="{{asset('templete/images/icon.png')}}" width="48" height="48" alt="User" />
+                    <img src="../assets/img/logo.png" width="48" height="48" alt="User" />
                     Student Follow Up
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

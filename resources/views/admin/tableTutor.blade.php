@@ -21,7 +21,7 @@
                             <tr>
                                 <td>
                                     <a href="#">
-                                        <img class="profile-image" src="{{asset('templete/images/icon.png')}}" width="40" height="40" style="border-radius: 50%;" alt="User" />
+                                        <img class="profile-image" src="{{asset('assets/img/'.$tutors->profile)}}" width="40" height="40" style="border-radius: 50%;" alt="User" />
                                     </a>
                                 </td>
                                 <td>{{$tutors->first_name}}.{{$tutors->last_name}}</td>
