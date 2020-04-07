@@ -11,13 +11,15 @@ use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class DashboardController extends Controller
 {
+
+   
     public function index(){
         
 
         $numbers_tutors = [
             [
                 'title' => 'Tutors',
-                'numberOfTutors' => User::all()->count()-1,
+                'numberOfTutors' => User::all()->count(),
             ],
         ];
         $number_student = [

@@ -48,7 +48,9 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
 
     Route::get('back','CommentController@back')->name('back');
 
-    Route::PUT('editComment/{id_comment}/{id_student}','CommentController@editComment')->name('editComment');
+    Route::PUT('editComment/{id_comment}','CommentController@editComment')->name('editComment');
+
+    Route::get('deleteComment/{id_comment}','CommentController@deleteComment')->name('deleteComment');
 
 
 });

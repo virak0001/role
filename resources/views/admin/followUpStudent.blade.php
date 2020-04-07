@@ -52,37 +52,9 @@
                         </td>
                         <td>{{$student->student_id}}</td>
                         <td>
-
                             <a href="{{route('admin.showComment',[$student->id])}}"><i class="material-icons">comment</i>Comment</a>
-
                         </td>
                         <td>
-                          <a href="{{route('admin.showFormEditStudent',$student->id)}}"><span class="material-icons">edit</span></a> 
-                          <a class="text-primary" tabindex="-1" type="button" data-toggle="modal" data-backdrop="false" aria-hidden="true" data-target="#exampleModal" href="#"><i class="material-icons">delete</i></a>
-                                <!-- Modal -->
-                                <div class="modal fade modal-open" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Student</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        Are you sure want to delelte?
-                                      </div>
-                                      <div class="modal-footer">
-                                        <form method="POST" action="{{route('admin.student.destroy',$student->id)}}">
-                                          @csrf
-                                          @method('DELETE')
-                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                          <button type="submit" class="btn btn-primary">Delete</button>
-                                        </form>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>  
                           <a href="#"><span class="material-icons">visibility</span></a> 
                         </td>
                   </tr>

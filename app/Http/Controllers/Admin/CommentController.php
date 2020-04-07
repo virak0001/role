@@ -30,22 +30,35 @@ class CommentController extends Controller
         return redirect()->back();
     }
 
-    public function editComment(Request $request, $id_comment, $id_student){
+    public function editComment(Request $request, $id_comment){
 
         $comment = Comment::find($id_comment);
-        $result = 'Cannot access redirect with this route';
-        if($comment->student_id == $id_student && auth()->id() == $comment->user_id){
-            $result = $comment;
+        // $result = 'Cannot access redirect with this route';
+        if(auth()->id() == $comment->user_id){
+            $comment->comment = $request ->get('comment');
+            $comment -> save();
         }
-        return $result;
+        return back();
     }
 
     public function showComment($id){
-        $student = Student::find($id);
-        return view('admin.comment')->with('student',$student);
+        $students = Student::find($id);
+        return view('admin.comment')->with('students',$students);
     }
 
     public function back(){
-        return redirect('admin/followUpStudent');
+        return redirect('admin/dashboard');
+    } 
+
+
+    public function deleteComment($id){
+        $comment = Comment::find($id);
+        if(auth()->id() == $comment->user_id){
+            $result = $comment;
+            $result -> delete();
+        }
+        return back();
+
     }
+
 }

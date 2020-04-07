@@ -91,7 +91,36 @@ class StudentController extends Controller
         $student -> class = $request -> get('class');
         $student -> student_id = $request -> get('student_id');
         $student -> save();
-        return redirect('admin/achiveStudent');
+        return redirect('admin/dashboard');
+    }
+
+
+    public function updateStudent(Request $request, $id){
+        $student = Student::find($id);
+
+        request()->validate([
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $imageName = time().'.'.request()->picture->getClientOriginalExtension();
+        request()->picture->move(public_path('/img_student/'), $imageName);
+
+        $student -> first_name = $request -> get('first_name');
+        $student -> last_name = $request -> get('last_name');
+        $student -> gender = $request -> get('gender');
+        $student -> year = $request -> get('year');
+        $student -> province = $request -> get('province');
+        $student -> picture = $imageName;
+        $student -> student_id = $request -> get('student_id');
+        $student ->  class = $request -> get('class');
+        $student -> save();
+        
+        return redirect('admin/dashboard');
+
+    }
+
+    public function showFormEditStudent($id){
+        $student = Student::find($id);
+        return view('admin.editStudent')->with('student',$student);
     }
 
     /**
@@ -127,34 +156,7 @@ class StudentController extends Controller
     {
         // 
     }
-
-    public function updateStudent(Request $request, $id){
-        $student = Student::find($id);
-
-        request()->validate([
-            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        $imageName = time().'.'.request()->picture->getClientOriginalExtension();
-        request()->picture->move(public_path('/img_student/'), $imageName);
-
-        $student -> first_name = $request -> get('first_name');
-        $student -> last_name = $request -> get('last_name');
-        $student -> gender = $request -> get('gender');
-        $student -> year = $request -> get('year');
-        $student -> province = $request -> get('province');
-        $student -> picture = $imageName;
-        $student -> student_id = $request -> get('student_id');
-        $student ->  class = $request -> get('class');
-        $student -> save();
-        return redirect('admin/achiveStudent');
-
-    }
-
-
-    public function showFormEditStudent($id){
-        $student = Student::find($id);
-        return view('admin.editStudent')->with('student',$student);
-    }
+    
     /**
      * Remove the specified resource from storage.
      *
