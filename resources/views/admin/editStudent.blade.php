@@ -66,6 +66,10 @@
                     <label for="province">Province</label>
                     <input class="form-control" type="text" value="{{$student->province}}" name="province" required>
                 </div> <!-- form-group end.// -->  
+                <div class="form-group" style="margin-top:-10px">
+                  <label for="gender">Choose Picture</label>
+                  <input type="file" name="picture" required="">
+              </div>
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary"> Create New  </button>
                   <a class="btn btn-danger float-right" href="">Cancel</a>

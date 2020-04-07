@@ -27,8 +27,6 @@ $.notify({
 	time: 1000,
 });
 
-// monthlyChart
-
 Chartist.Pie('#monthlyChart', {
 	labels: ['50%', '20%', '30%'],
 	series: [50, 20, 30]
@@ -161,3 +159,5 @@ $(".mapcontainer").mapael({
 				}
 			},
 		});
+
+		

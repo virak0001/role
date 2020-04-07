@@ -13,12 +13,12 @@
                     <div class="row">
                       <div class="col-5">
                         <div class="icon-big text-center">
-                          <i class="la la-users"></i>
+                          <i class="material-icons">person</i>
                         </div>
                       </div>
                       <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                          @foreach ($numbers as $number)
+                          @foreach ($numbers_tutors as $number)
                             <p class="card-category h1">{{$number['title']}}</p>
                             <h4 class="card-title">{{$number['numberOfTutors']}}</h4>
                           @endforeach
@@ -36,13 +36,15 @@
                     <div class="row">
                       <div class="col-5">
                         <div class="icon-big text-center">
-                          <i class="la la-bar-chart"></i>
+                          <i class="material-icons">group</i>
                         </div>
                       </div>
                       <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                          <p class="card-category">Sales</p>
-                          <h4 class="card-title">$ 1,345</h4>
+                          @foreach ($numbers_student as $student)
+                        <p class="card-category">{{$student['title']}}</p>
+                        <h4 class="card-title">{{$student['numberStudent']}}</h4>
+                          @endforeach
                         </div>
                       </div>
                     </div>
@@ -56,13 +58,15 @@
                   <div class="row">
                     <div class="col-5">
                       <div class="icon-big text-center">
-                        <i class="la la-newspaper-o"></i>
+                        <i class="material-icons">group</i>
                       </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                       <div class="numbers">
-                        <p class="card-category">Subscribers</p>
-                        <h4 class="card-title">1303</h4>
+                        @foreach ($number_student_achive as $achive)
+                        <p class="card-category">{{$achive['title']}}</p>
+                        <h4 class="card-title">{{$achive['numberStudentAchive']}}</h4>
+                        @endforeach
                       </div>
                     </div>
                   </div>
@@ -75,13 +79,15 @@
                   <div class="row">
                     <div class="col-5">
                       <div class="icon-big text-center">
-                        <i class="la la-check-circle"></i>
+                        <i class="material-icons">group</i>
                       </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                       <div class="numbers">
-                        <p class="card-category">Order</p>
-                        <h4 class="card-title">576</h4>
+                        @foreach ($number_student_follow_up as $studentFolowUp)
+                        <p class="card-category">{{$studentFolowUp['title']}}</p>
+                        <h4 class="card-title">{{$studentFolowUp['numberStudentFollowUp']}}</h4>
+                        @endforeach
                       </div>
                     </div>
                   </div>
@@ -89,7 +95,62 @@
               </div>
             </div>
           </div>
-        </div>
+          @foreach ($gender as $male)
+            <span class="badge badge-primary">Male {{$male['male']}}</span>
+            <span class="badge badge-primary">Female {{$male['female']}}</span>
+          @endforeach
+          <br><br>
+          <h5 class="page-title">All student data</h5>
+          <div class="table-responsive">
+            <table id="example" class="table table-striped" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th class="th-sm">Profile</th>
+                  <th class="th-sm">Name</th>
+                  <th class="th-sm">Status</th>
+                  <th class="th-sm">Student_ID</th>
+                  <th class="th-sm">Comment</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($students as $student)
+                <tr>
+                  <td><img src="{{asset('img_student/'.$student->picture)}}" width="40" style="border-radius: 25px;" height="40" alt="User" /></td>
+                  <td>{{$student->first_name}}.{{$student->last_name}}</td>
+                  <td>
+                    @if ($student->status == 0)
+                        Achive
+                    @else
+                        Follow Up
+                    @endif
+                  </td>
+                  <td>{{$student->student_id}}</td>
+                    <td>
+                      <form id="comment" action="" method="post">
+                        @csrf
+                        @method('DELETE')
+                      <div class="input-group mb-3">
+                        <textarea id ='ta'></textarea>
+                        <div class="input-group-append">
+                          <a href=""><i class="material-icons">send</i></a>
+                        </div>
+                      </div>
+                    </form>
+                    </td>
+                </tr>
+                @endforeach
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th class="th-sm">Profile</th>
+                  <th class="th-sm">Name</th>
+                  <th class="th-sm">Status</th>
+                  <th class="th-sm">Student_ID</th>
+                  <th class="th-sm">Comment</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
       </div>	
     </div>
   </section>

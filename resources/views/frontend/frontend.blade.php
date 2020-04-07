@@ -13,7 +13,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	@if (Auth::user()->role->role_id == 1)
+	@if (Auth::user()->role->id == 1)
 	<div class="wrapper">
 		<div class="main-header">
 			<div class="logo-header">
@@ -150,7 +150,7 @@
 					</div>
 					<ul class="nav">
 						<li class="nav-item active">
-							<a href="index.html">
+							<a href="{{route('admin.dashboard')}}">
 								<span class="material-icons">dashboard</span>
 								<strong style="margin-left: 15px;">Dashboard</strong>
 							</a>
@@ -373,10 +373,10 @@
   <script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
   <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
   <script src="../assets/js/ready.min.js"></script>
-  <script src="../assets/js/demo.js"></script>
-
+  
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../assets/js/demo.js"></script>
   <script>
 	$(document).ready(function() {
 		$('#example').DataTable({
@@ -391,5 +391,5 @@
 			$("#btnsubmit").hide();
 			$("#file").val("");
 		})
-	} );
+	} ); 
 	</script>

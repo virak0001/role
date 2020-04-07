@@ -10,6 +10,10 @@ class Student extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admin']], function (){
 
-    Route::PUT('imageUploadPost', 'DashboardController@imageUploadPost')->name('imageUploadPost');
+    // Route::PUT('imageUploadPost', 'DashboardController@imageUploadPost')->name('imageUploadPost');
 
     Route::resource('tutor','TutorController');
 
@@ -41,6 +41,15 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::get('showAddStudent','StudentController@showAddStudent')->name('showAddStudent');
 
     Route::PUT('changeProfilePicture','TutorController@changeProfilePicture')->name('changeProfilePicture');
+
+    Route::PUT('storeCommment/{id_student}/{id_tutor}','CommentController@storeCommment')->name('storeCommment');
+
+    Route::get('showComment\{id}','CommentController@showComment')->name('showComment');
+
+    Route::get('back','CommentController@back')->name('back');
+
+    Route::PUT('editComment/{id_comment}/{id_student}','CommentController@editComment')->name('editComment');
+
 
 });
 Route::group(['as'=>'author.','prefix'=>'author','namespace'=>'Author','middleware'=>['auth','author']], function (){

@@ -8,7 +8,8 @@
           <a href="{{route('admin.showAddStudent')}}"><i class="material-icons ml-5" style="margin-top:-5px; font-size:50px">add_circle</i></a>
           <p>Create New Student</p>
           <hr>
-              <table id="example" class="table table-striped" cellspacing="0" width="100%">
+              <div class="table-responsive">
+                <table id="example" class="table table-striped" cellspacing="0" width="100%">
                   <thead>
                     <tr>
                       <th class="th-sm">Profile</th>
@@ -93,6 +94,7 @@
                     </tr>
                   </tfoot>
                 </table>
+              </div>
         </div>
       </div>	
     </div>
