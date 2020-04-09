@@ -20,9 +20,14 @@ class TutorController extends Controller
     {
         $user = new User();
         $tutors = $user::all();
-        return view('admin.tableTutor')->with('tutors',$tutors);
+        return view('admin.tutor')->with('tutors',$tutors);
     }
 
+    /**
+     * Display a listing of the tutor.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function showPageAddTutor($id){
         $user = new User();
@@ -41,7 +46,13 @@ class TutorController extends Controller
         //
     }
 
-    public function changeProfilePicture(Request $request){
+    /**
+     * Show the form for chnage prifile of user.
+     *
+     * @return \Illuminate\Http\Response    
+     */
+    
+    public function changeProfilePicture(){
 
         $auth = Auth::user();
         request()->validate([

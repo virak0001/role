@@ -6,113 +6,17 @@
         <div class="container-fluid">
           <h4 class="page-title">Dashboard</h4>
           <div class="row">
-            <div class="col-md-3">
-              <div class="card card-stats card-warning">
-                <div class="card-body ">
-                  <a href="" style="text-decoration:none">
-                    <div class="row">
-                      <div class="col-5">
-                        <div class="icon-big text-center">
-                          <i class="material-icons">person</i>
-                        </div>
-                      </div>
-                      <div class="col-7 d-flex align-items-center">
-                        <div class="numbers">
-                          @foreach ($numbers_tutors as $number)
-                            <p class="card-category h1">{{$number['title']}}</p>
-                            <h4 class="card-title">{{$number['numberOfTutors']}}</h4>
-                          @endforeach
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="card card-stats card-success">
-                <div class="card-body ">
-                  <a href="" style="text-decoration:none">
-                    <div class="row">
-                      <div class="col-5">
-                        <div class="icon-big text-center">
-                          <i class="material-icons">group</i>
-                        </div>
-                      </div>
-                      <div class="col-7 d-flex align-items-center">
-                        <div class="numbers">
-                          @foreach ($numbers_student as $student)
-                        <p class="card-category">{{$student['title']}}</p>
-                        <h4 class="card-title">{{$student['numberStudent']}}</h4>
-                          @endforeach
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="card card-stats card-danger">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-5">
-                      <div class="icon-big text-center">
-                        <i class="material-icons">group</i>
-                      </div>
-                    </div>
-                    <div class="col-7 d-flex align-items-center">
-                      <div class="numbers">
-                        @foreach ($number_student_achive as $achive)
-                        <p class="card-category">{{$achive['title']}}</p>
-                        <h4 class="card-title">{{$achive['numberStudentAchive']}}</h4>
-                        @endforeach
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="card card-stats card-primary">
-                <div class="card-body ">
-                  <div class="row">
-                    <div class="col-5">
-                      <div class="icon-big text-center">
-                        <i class="material-icons">group</i>
-                      </div>
-                    </div>
-                    <div class="col-7 d-flex align-items-center">
-                      <div class="numbers">
-                        @foreach ($number_student_follow_up as $studentFolowUp)
-                        <p class="card-category">{{$studentFolowUp['title']}}</p>
-                        <h4 class="card-title">{{$studentFolowUp['numberStudentFollowUp']}}</h4>
-                        @endforeach
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
             <div class="col-12">
-                <div class="row">
-                  <div class="col-sm-2">
-                    <a href="{{route('admin.showAddStudent')}}"><i class="material-icons ml-5" style="margin-top:-5px; font-size:50px">add_circle</i></a><br>
-                    <p class="ml-4">New Student</p>
-                  </div>
-                  <div class="col-xm-6">
-                    <p class="ml-3">Gender numbers</p>
+                <div class="row d-flex justify-content-between">
+                    <a href="{{route('admin.showAddStudent')}}"><i class="material-icons ml-5" style="margin-top:-5px; font-size:50px">add_circle</i></a>
                     @foreach ($gender as $male)
-                          <span class="badge badge-primary">Male {{$male['male']}}</span>
-                          &nbsp&nbsp&nbsp&nbsp&nbsp;
-                          <span class="badge badge-danger">Female {{$male['female']}}</span>
+                    <p style="margin-right:15px"><span class="badge badge-primary">Male {{$male['male']}}</span>&nbsp;<span class="badge badge-danger">Female {{$male['female']}}</span></p>
                     @endforeach
-                  </div>
                 </div>
-              <div class="col-12 text-center">
-              <h5 class="page-title">student data</h5>
+            <div class="col-12 text-center">
+                  @foreach ($numbers_student as $student)
+                    <h5 class="card-category">{{$student['title']}} <span class="badge badge-primary">{{$student['numberStudent']}}</span></h5>
+                  @endforeach
             </div>
            </div>
           </div>
@@ -124,11 +28,11 @@
                   <th class="th-sm">Name</th>
                   <th class="th-sm">Class</th>
                   <th class="th-sm">Gender</th>
-                  <th class="th-sm">Year</th>
+                  <th class="th-sm">Tutor_Name</th>
                   <th class="th-sm">Status</th>
                   <th class="th-sm">Student_ID</th>
                   <th class="th-sm">Comment</th>
-                  <th class="th-sm">Provinc</th>
+                  
                   <th class="th-sm">Action</th>
                 </tr>
               </thead>
@@ -139,7 +43,23 @@
                   <td>{{$student->first_name}}.{{$student->last_name}}</td>
                   <td>{{$student->class}}</td>
                   <td>{{$student->gender}}</td>
-                  <td>{{$student->year}}</td>
+                  <td class="text-center">
+
+                      @if ($student->user_id == null)
+                        @if ($student->status == false)
+                        <a  style="cursor:pointer" >
+                          <span class="material-icons">add_circle</span>
+                        </a>
+                        @else
+                        <a  href="{{route('admin.showPageAddTutor',$student->id)}}" type="button">
+                          <span  class="material-icons">add_circle</span>
+                        </a>
+                        @endif
+                      @else
+                          <p class="text-primary">{{$student->user['first_name']}}.{{$student->user['last_name']}}</p>
+                      @endif
+
+                  </td>
                   <td>
                     @if ($student->status == 0)
                     <div class="dropdown">
@@ -166,11 +86,15 @@
                     @endif
                   </td>
                   <td>{{$student->student_id}}</td>
+                    @if ($student->user_id!=null)
                     <td><a href="{{route('admin.showComment',[$student->id])}}"><i class="material-icons">comment</i>Comment</a></td>
-                    <td>{{$student->province}}</td>
+                    @else
+                    <td class="text-primary" style="cursor:pointer"><span class="material-icons ">speaker_notes_off</span>Comment</td>
+                    @endif
+                    
                     <td>
 
-                      <a href="{{route('admin.showFormEditStudent',$student->id)}}"><span class="material-icons">edit</span></a> 
+                      <a href="{{route('admin.edit',$student->id)}}"><span class="material-icons">edit</span></a> 
                       <a class="text-primary" tabindex="-1" type="button" data-toggle="modal" data-backdrop="false" aria-hidden="true" data-target="#exampleModal" href="#"><i class="material-icons">delete</i></a>
                       <!-- Modal -->
                       <div class="modal fade modal-open" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -196,7 +120,7 @@
                           </div>
                         </div>
                       </div>  
-                      <a href="#"><span class="material-icons">visibility</span></a>
+                      <a href="{{route('admin.showSpecficStudent',$student->id)}}"><span class="material-icons">visibility</span></a>
                     </td>
                 </tr>
                 @endforeach
@@ -207,10 +131,10 @@
                   <th class="th-sm">Name</th>
                   <th class="th-sm">Class</th>
                   <th class="th-sm">Gender</th>
-                  <th class="th-sm">Year</th>
+                  <th class="th-sm">Tutor_Name</th>
                   <th class="th-sm">Status</th>
                   <th class="th-sm">Student_ID</th>
-                  <th class="th-sm">Provinc</th>
+                  
                   <th class="th-sm">Comment</th>
                   <th class="th-sm">Action</th>
                 </tr>

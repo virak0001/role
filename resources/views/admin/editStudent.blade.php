@@ -7,7 +7,7 @@
             <div class="col-sm-2 col-md-2"></div>
             <div class="col-sm-8 col-md-8">
               <h4 class="page-title text-center">Edit Student Information</h4>
-              <form  action="{{route('admin.updateStudent',$student->id)}}" method="POST" enctype="multipart/form-data">
+              <form  action="{{route('admin.student.update',$student->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-row" style="margin-top:-10px">
@@ -66,10 +66,6 @@
                     <label for="province">Province</label>
                     <input class="form-control" type="text" value="{{$student->province}}" name="province" required>
                 </div> <!-- form-group end.// -->  
-                <div class="form-group"  style="margin-top:-10px">
-                  <label for="gender" >Choose Picture</label>
-                  <input required  type="file" name="picture">
-              </div>
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary"> Update </button>
                   <a class="btn btn-danger float-right" href="">Cancel</a>

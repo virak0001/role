@@ -1,3 +1,6 @@
+body {
+	background-color: rgb(243, 243, 245);
+}
 .update-pro{
 	margin: 15px 25px;
 }
@@ -119,4 +122,42 @@ textarea {
 
 textarea[placeholder] {
     text-align: center;
+}
+
+* {box-sizing: border-box;}
+
+.container-image {
+  position: relative;
+  width: 23%;
+  max-width: 300px;
+ 
+}
+
+.image {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+  	border-radius: 50px;
+}
+
+.overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 16px;
+  padding: 15px;
+  text-align: center;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.container-image:hover .overlay {
+  opacity: 1;
 }

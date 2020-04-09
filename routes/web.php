@@ -14,15 +14,13 @@ Route::get('/', function () {
 
 Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admin']], function (){
 
-    // Route::PUT('imageUploadPost', 'DashboardController@imageUploadPost')->name('imageUploadPost');
-
     Route::resource('tutor','TutorController');
 
     Route::resource('student','StudentController');
 
-    Route::PUT('updateStudent/{id}','StudentController@updateStudent')->name('updateStudent');
+    Route::get('showSpecficStudent\{id}','StudentController@showSpecficStudent')->name('showSpecficStudent');
 
-    Route::get('showFormEditStudent\{id}','StudentController@showFormEditStudent')->name('showFormEditStudent');
+    Route::get('edit\{id}','StudentController@edit')->name('edit');
     
     Route::PUT('statusAchive/{id}','StudentController@updateStatusAchive')->name('statusAchive');
 
@@ -42,7 +40,7 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
 
     Route::PUT('changeProfilePicture','TutorController@changeProfilePicture')->name('changeProfilePicture');
 
-    Route::PUT('storeCommment/{id_student}/{id_tutor}','CommentController@storeCommment')->name('storeCommment');
+    Route::PUT('storeCommment/{id_student}/{tutor_id}','CommentController@storeCommment')->name('storeCommment');
 
     Route::get('showComment\{id}','CommentController@showComment')->name('showComment');
 
@@ -50,13 +48,17 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
 
     Route::PUT('editComment/{id_comment}','CommentController@editComment')->name('editComment');
 
-    Route::get('deleteComment/{id_comment}','CommentController@deleteComment')->name('deleteComment');
+    Route::get('deleteComment\{id_comment}','CommentController@deleteComment')->name('deleteComment');
+
+    Route::PUT('changePictureStudent\{id}','StudentController@changePictureStudent')->name('changePictureStudent');
 
 
 });
 Route::group(['as'=>'author.','prefix'=>'author','namespace'=>'Author','middleware'=>['auth','author']], function (){
 
     Route::get('dashboard','DashboardController@index')->name('dashboard');
+
+    route::get('tutor','TutorController@index')->name('tutor');
 
     Route::PUT('changeProfilePicture','TutorController@changeProfilePicture')->name('changeProfilePicture');
 });

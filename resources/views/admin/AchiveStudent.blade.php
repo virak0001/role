@@ -4,7 +4,9 @@
     <div class="main-panel">
       <div class="content">
         <div class="container-fluid">
-          <h3 class="text-center" >Archive list</h3>
+          @foreach ($number_student_achive as $achive)
+                        <h4 class="card-category text-center">{{$achive['title']}} <span class="badge badge-primary">{{$achive['numberStudentAchive']}}</span></h4>
+                        @endforeach
           <hr>
               <div class="table-responsive">
                 <table id="example" class="table table-striped" cellspacing="0" width="100%">

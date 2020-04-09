@@ -324,13 +324,13 @@
 					</div>
 					<ul class="nav">
 						<li class="nav-item active">
-							<a href="index.html">
+							<a href="{{route('author.dashboard')}}">
 								<span class="material-icons">dashboard</span>
 								<strong style="margin-left: 15px;">Dashboard</strong>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{route('admin.tutor.index')}}"">
+							<a href="{{route('author.tutor')}}">
 								<span class="material-icons">person</span>
 								<p style="margin-left: 15px;">Turtor</p>
 							</a>

@@ -18,12 +18,11 @@ class CommentController extends Controller
         $this->middleware('auth');
     }
     // Create new data in table comment
-    public function storeCommment(Request $request, $id_student, $id_tutor){
-
+    public function storeCommment(Request $request, $id_student, $tutor_id){
         $comment =new Comment;
         if($request -> comment != null) {
             $comment -> student_id = $id_student;
-            $comment -> user_id = $id_tutor;
+            $comment -> user_id = $tutor_id;
             $comment -> comment = $request -> get('comment')    ;
             $comment -> save();
         }
@@ -34,7 +33,8 @@ class CommentController extends Controller
 
         $comment = Comment::find($id_comment);
         // $result = 'Cannot access redirect with this route';
-        if(auth()->id() == $comment->user_id){
+
+        if(auth()->id() == $comment['user_id']){
             $comment->comment = $request ->get('comment');
             $comment -> save();
         }
@@ -53,9 +53,8 @@ class CommentController extends Controller
 
     public function deleteComment($id){
         $comment = Comment::find($id);
-        if(auth()->id() == $comment->user_id){
-            $result = $comment;
-            $result -> delete();
+        if(auth()->id() == $comment['user_id']){
+            $comment -> delete();
         }
         return back();
 

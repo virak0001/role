@@ -4,7 +4,10 @@
     <div class="main-panel">
       <div class="content">
         <div class="container-fluid">
-          <h3 class="text-center">List Student In Follow up</h3>
+          @foreach ($number_student_follow_up as $studentFolowUp)
+              <h4 class="text-center" class="card-category">{{$studentFolowUp['title']}}  <span class="badge badge-primary">{{$studentFolowUp['numberStudentFollowUp']}}</span></h4>
+          @endforeach
+          <hr>
             <div class="table-responsive">
               <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>

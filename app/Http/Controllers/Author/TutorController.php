@@ -4,10 +4,31 @@ namespace App\Http\Controllers\Author;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
 
 class TutorController extends Controller
 {
-    public function changeProfilePicture(Request $request){
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $user = new User();
+        $tutors = $user::all();
+        return view('author.tutor')->with('tutors',$tutors);
+    }
+
+   /**
+     * Show the form for chnage prifile of user.
+     *
+     * @return \Illuminate\Http\Response    
+     */
+
+    public function changeProfilePicture(){
 
         $auth = Auth::user();
         request()->validate([
@@ -21,4 +42,5 @@ class TutorController extends Controller
         $auth -> save();
         return back();
     }
+
 }
