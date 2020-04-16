@@ -91,13 +91,11 @@
                     @else
                     <td class="text-primary" style="cursor:pointer"><span class="material-icons ">speaker_notes_off</span>Comment</td>
                     @endif
-                    
                     <td>
-
                       <a href="{{route('admin.edit',$student->id)}}"><span class="material-icons">edit</span></a> 
-                      <a class="text-primary" tabindex="-1" type="button" data-toggle="modal" data-backdrop="false" aria-hidden="true" data-target="#exampleModal" href="#"><i class="material-icons">delete</i></a>
+                      <a class="text-primary" tabindex="-1" type="button" data-toggle="modal" data-backdrop="false" aria-hidden="true" data-target="#exampleModal{{$student->id}}" href="#"><i class="material-icons">delete</i></a>
                       <!-- Modal -->
-                      <div class="modal fade modal-open" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal fade modal-open" id="exampleModal{{$student->id}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -120,7 +118,79 @@
                           </div>
                         </div>
                       </div>  
-                      <a href="{{route('admin.showSpecficStudent',$student->id)}}"><span class="material-icons">visibility</span></a>
+                      <a data-toggle="modal" data-target="#basicExampleModal{{$student->id}}" href="{{route('admin.showSpecficStudent',$student->id)}}"><span class="material-icons">visibility</span></a>
+                      <!-- Modal -->
+                      <div class="modal fade" id="basicExampleModal{{$student->id}}" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">View Detail</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card-header p-4 ">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="container-image">
+                                            <img class="mx-auto d-block" src="{{asset('img_student/'.$student->picture)}}" width="105" style="border-radius: 105px;" height="105" alt="Avatar">
+                                                <div class="overlay"><a href="" data-toggle="modal" data-target="#view{{$student->id}}"><span class="material-icons text-light">add_a_photo</span></a></div>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="view{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="view{{$student->id}}"
+                                                        aria-hidden="true">
+                                                    <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Please picture</h5>
+                                                        </button>
+                                                        </div>
+                                                            <form action="{{route('admin.changePictureStudent',$student->id)}}" method="post" enctype="multipart/form-data">
+                                                            <div class="modal-body">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <input type="file" name="picture">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-sm btn-primary">Save changes</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                      <hr>
+                                      <div class="row d-flex justify-content-between">
+                                        <p> <strong>First Name: </strong>{{$student['first_name']}} </p>
+                                        <p><strong>Last Name: </strong>{{$student['last_name']}}</p>
+                                        </div>
+                                        <div class="row d-flex justify-content-between">
+                                            <p><strong>ID_Student: </strong>{{$student['student_id']}}</p>
+                                            <p><strong>Class: </strong>{{$student['class']}}</p>
+                                        </div>
+                                        <div class="row d-flex justify-content-between">
+                                            <p><strong>Year: </strong>{{$student['year']}}</p>
+                                            <p><strong>Gender: </strong>{{$student['gender']}}</p>  
+                                        </div>
+                                        <div class="row d-flex justify-content-between">
+                                          <p><strong>Province </strong>{{$student['province']}}</p>
+                                          <p><strong>Student_ID: </strong>{{$student['student_id']}}</p>  
+                                        </div>
+                                        <div class="row d-flex justify-content-between">
+                                          @if ($student['status']==false)
+                                          <p class="text-primary"><strong>Status: </strong> Achive</p>
+                                          @else
+                                          <p class="text-primary"> <strong>Status: </strong> Follow Up</p>
+                                          @endif
+                                          <p><strong>Tutor Name </strong>{{$student->user['first_name']}}.{{$student->user['last_name']}}</p>
+                                        </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </td>
                 </tr>
                 @endforeach
@@ -141,6 +211,7 @@
               </tfoot>
             </table>
           </div>
+          <!-- Button trigger modal -->
       </div>	
     </div>
   </section>

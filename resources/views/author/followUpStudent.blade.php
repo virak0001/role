@@ -28,39 +28,21 @@
                       <tr>
                         <td><img src="{{asset('img_student/'.$student->picture)}}" width="40" style="border-radius: 25px;" height="40" alt="User" /></td>
                         <td>{{$student->first_name}}.{{$student->last_name}}</td>
-                        <td>
-                          @if ($student->user_id == null)
-                            <div class="form-group p-0">
-                            <a href="{{route('admin.showPageAddTutor',$student->id)}}" type="button">
-                              <span class="material-icons">add_circle</span>
-                            </a>
-                            @else
-                            <a class="text-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">{{$student->User->first_name}}.&nbsp;{{ $student->User->last_name}}</a>                            
-                            <ul class="dropdown-menu">
-                              <a href="{{route('admin.showPageAddTutor',$student->id)}}">Change</a>
-                            </ul>  
-                            @endif
+                        <td class="text-primary">
+                          {{$student->User->first_name}}.&nbsp;{{ $student->User->last_name}}
+                        </td>
                         <td>{{$student->class}}</td>
-                        <td>
-                          <div class="dropdown">
-                            <a class="text-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">Follow Up</a>                            
-                            <ul class="dropdown-menu">
-                              <form id="submit" method="POST" action="{{ route('admin.statusFollowUp',$student['id']) }}">
-                                  @csrf
-                                  @method('PUT')
-                                  <span><button class="btn" style="cursor:pointer">Achive</button></span>
-                              </form>
-                            </ul>  
-                          </div>
+                        <td class="text-primary">
+                            Follow Up
                         </td>
                         <td>{{$student->student_id}}</td>
                         <td>
-                            <a href="{{route('admin.showComment',[$student->id])}}"><i class="material-icons">comment</i>Comment</a>
+                            <a href="{{route('author.showComment',[$student->id])}}"><i class="material-icons">comment</i>Comment</a>
                         </td>
                         <td>
                           <a data-toggle="modal" data-target="#basicExampleModal{{$student->id}}" href="{{route('admin.showSpecficStudent',$student->id)}}"><span class="material-icons">visibility</span></a>
                       <!-- Modal -->
-                      <div class="modal fade" id="basicExampleModal{{$student->id}}" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="exampleModalLabel"
+                      <div class="modal fade" id="basicExampleModal{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">

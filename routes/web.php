@@ -52,15 +52,31 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
 
     Route::PUT('changePictureStudent\{id}','StudentController@changePictureStudent')->name('changePictureStudent');
 
+    Route::get('unserMentor','StudentController@unserMentor')->name('unserMentor');
 
 });
 Route::group(['as'=>'author.','prefix'=>'author','namespace'=>'Author','middleware'=>['auth','author']], function (){
 
     Route::get('dashboard','DashboardController@index')->name('dashboard');
 
-    route::get('tutor','TutorController@index')->name('tutor');
+    Route::get('tutor','TutorController@index')->name('tutor');
+
+    Route::get('achiveStudent','StudentController@achiveStudent')->name('achiveStudent');
+
+    Route::get('unserMentor','StudentController@unserMentor')->name('unserMentor');
+
+    Route::get('followUpStudent','StudentController@followUpStudent')->name('followUpStudent');
 
     Route::PUT('changeProfilePicture','TutorController@changeProfilePicture')->name('changeProfilePicture');
+
+    Route::get('showComment\{id}','CommentController@showComment')->name('showComment');
+
+    Route::PUT('storeCommment/{id_student}/{tutor_id}','CommentController@storeCommment')->name('storeCommment');
+
+    Route::PUT('editComment/{id_comment}','CommentController@editComment')->name('editComment');
+
+    Route::get('deleteComment\{id_comment}','CommentController@deleteComment')->name('deleteComment');
+
 });
 
 

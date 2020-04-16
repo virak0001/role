@@ -30,12 +30,12 @@
                                   <td>{{$tutors->address}}</td>
                                   <td>
                                     @if ($tutors->role->id != 1)
-                                      <a class="text-primary" tabindex="-1" type="button" data-toggle="modal" data-backdrop="false" aria-hidden="true" data-target="#exampleModal" href="#"><i class="material-icons">delete</i></a>
+                                      <a class="text-primary" tabindex="-1" type="button" data-toggle="modal" data-backdrop="false" aria-hidden="true" data-target="#exampleModal{{$tutors->id}}" href="#"><i class="material-icons">delete</i></a>
                                     @else
                                       <strong>Your Own</strong>
                                     @endif
                                         <!-- Modal -->
-                                          <div class="modal fade modal-open" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal fade modal-open" id="exampleModal{{$tutors->id}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                               <div class="modal-dialog" role="document">
                                               <div class="modal-content">
                                                   <div class="modal-header">
@@ -47,7 +47,7 @@
                                                   <div class="modal-body">
                                                   </div>
                                                   <div class="modal-footer">
-                                                      <form method="POST" action="{{route('admin.tutor.destroy',$tutors->id)}}">
+                                                      <form action="{{route('admin.tutor.destroy',[$tutors->id])}}" method="POST" >
                                                           @csrf
                                                           @method('DELETE')
                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -57,7 +57,6 @@
                                               </div>
                                               </div>
                                           </div>
-                                         
                                   </td>
                               </tr>
                             

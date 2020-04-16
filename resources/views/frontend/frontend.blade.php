@@ -100,8 +100,7 @@
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
-										<div class="u-img"><img src="../assets/img/{{Auth::user()->profile}}" alt="user"></div>
-										<div class="u-text">
+										<div class="u-img"><img src="../assets/img/{{Auth::user()->profile}}" alt="user"></div>										<div class="u-text">
 											<h4>{{Auth::user()->first_name}}.{{Auth::user()->last_name}}</h4>
 											<p class="text-muted">{{Auth::user()->email}}</p>
 										</div>
@@ -151,7 +150,7 @@
 					<ul class="nav">
 						<li class="nav-item active">
 							<a href="{{route('admin.dashboard')}}">
-								<span class="material-icons">dashboard</span>
+								<span class="material-icons text-primary">dashboard</span>
 								<strong style="margin-left: 15px;">Dashboard</strong>
 							</a>
 						</li>
@@ -163,20 +162,20 @@
 						</li>
 						<li class="nav-item">
 							<a href="{{route('admin.achiveStudent')}}">
-								<span class="material-icons">people</span>
+								<span class="material-icons text-success">people</span>
 								<p style="margin-left: 15px;">Achive Student</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="{{route('admin.followUpStudent.index')}}">
-								<span class="material-icons">people</span>
+								<span class="material-icons text-info">people</span>
 								<p style="margin-left: 15px;">Follow Up Student</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="index.html">
-								<span class="material-icons">comment</span>
-								<p style="margin-left: 15px;">Comments</p>
+							<a href="{{route('admin.unserMentor')}}">
+								<span class="material-icons text-danger">people</span>
+								<p style="margin-left: 15px;">Under Mentor</p>
 							</a>
 						</li>
 					</ul>
@@ -325,7 +324,7 @@
 					<ul class="nav">
 						<li class="nav-item active">
 							<a href="{{route('author.dashboard')}}">
-								<span class="material-icons">dashboard</span>
+								<span class="material-icons text-primary">dashboard</span>
 								<strong style="margin-left: 15px;">Dashboard</strong>
 							</a>
 						</li>
@@ -336,21 +335,21 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{route('admin.achiveStudent')}}">
-								<span class="material-icons">people</span>
+							<a href="{{route('author.achiveStudent')}}">
+								<span class="material-icons text-success">people</span>
 								<p style="margin-left: 15px;">Achive Student</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{route('admin.followUpStudent.index')}}">
-								<span class="material-icons">people</span>
+							<a href="{{route('author.followUpStudent')}}">
+								<span class="material-icons text-info">people</span>
 								<p style="margin-left: 15px;">Follow Up Student</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="index.html">
-								<span class="material-icons">comment</span>
-								<p style="margin-left: 15px;">Comments</p>
+							<a href="{{Route('author.unserMentor')}}">
+								<span class="material-icons text-danger">people</span>
+								<p style="margin-left: 15px;">Under Mentor</p>
 							</a>
 						</li>
 					</ul>

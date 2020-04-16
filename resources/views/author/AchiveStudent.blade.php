@@ -5,8 +5,8 @@
       <div class="content">
         <div class="container-fluid">
           @foreach ($number_student_achive as $achive)
-                        <h4 class="card-category text-center">{{$achive['title']}} <span class="badge badge-primary">{{$achive['numberStudentAchive']}}</span></h4>
-                        @endforeach
+            <h4 class="card-category text-center">{{$achive['title']}} <span class="badge badge-primary">{{$achive['numberStudentAchive']}}</span></h4>
+          @endforeach
           <hr>
               <div class="table-responsive">
                 <table id="example" class="table table-striped" cellspacing="0" width="100%">
@@ -19,7 +19,6 @@
                       <th class="th-sm">Year</th>
                       <th class="th-sm">Status</th>
                       <th class="th-sm">Student_ID</th>
-                      <th class="th-sm">Provinc</th>
                       <th class="th-sm">Action</th>
                     </tr>
                   </thead>
@@ -34,24 +33,16 @@
                           <td>{{$student->year}}</td>
                           <td> 
                             @if ($student->status == 0)
-                            <div class="dropdown">
-                              <a class="text-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">Achive</a>                            
-                              <ul class="dropdown-menu">
-                                <form type="submit" method="POST" action="{{ route('admin.statusAchive',$student['id']) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <span><button class="btn" style="cursor:pointer">Follow Up</button></span>
-                                </form>
-                              </ul>  
-                            </div>
-                              @endif
+                              <p class="text-primary">Achive</p>
+                            @else
+                              <p class="text-primary">Follow Up</p>
+                            @endif
                           </td>
                           <td>{{$student->student_id}}</td>
-                          <td>{{$student->province}}</td>
                           <td>
                             <a data-toggle="modal" data-target="#basicExampleModal{{$student->id}}" href="{{route('admin.showSpecficStudent',$student->id)}}"><span class="material-icons">visibility</span></a>
                       <!-- Modal -->
-                      <div class="modal fade" id="basicExampleModal{{$student->id}}" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="exampleModalLabel"
+                      <div class="modal fade" id="basicExampleModal{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
@@ -66,30 +57,6 @@
                                     <div class="row d-flex justify-content-center">
                                         <div class="container-image">
                                             <img class="mx-auto d-block" src="{{asset('img_student/'.$student->picture)}}" width="105" style="border-radius: 105px;" height="105" alt="Avatar">
-                                                <div class="overlay"><a href="" data-toggle="modal" data-target="#view{{$student->id}}"><span class="material-icons text-light">add_a_photo</span></a></div>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="view{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="view{{$student->id}}"
-                                                        aria-hidden="true">
-                                                    <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle">Please picture</h5>
-                                                        </button>
-                                                        </div>
-                                                            <form action="{{route('admin.changePictureStudent',$student->id)}}" method="post" enctype="multipart/form-data">
-                                                            <div class="modal-body">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <input type="file" name="picture">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-sm btn-primary">Save changes</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    </div>
-                                                </div>
                                         </div>
                                     </div>
                                       <hr>
@@ -137,7 +104,6 @@
                       <th class="th-sm">Year</th>
                       <th class="th-sm">Status</th>
                       <th class="th-sm">Student_ID</th>
-                      <th class="th-sm">Provinc</th>
                       <th class="th-sm">Action</th>
                     </tr>
                   </tfoot>

@@ -5,9 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use File;
-use PHPUnit\Framework\MockObject\Builder\Stub;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -30,21 +28,28 @@ class StudentController extends Controller
         return view('admin.followUpStudent')->with(array('students'=>$students, 'number_student_follow_up'=>$number_student_follow_up));
     }
 
+    /**
+     * Change status student to achive
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function achiveStudent(){
-
         $students = Student::all();
-
         $number_student_achive = [
             [
                 'title' => 'Achive List',
                 'numberStudentAchive' => Student::all()->where('status', 0)->count(),
             ],
         ];
-
         return view('admin.AchiveStudent')->with(array('students'=>$students,'number_student_achive'=>$number_student_achive));
-            
     }
 
+
+    /**
+     * Change status student to follow up
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function updateStatusAchive($id){
         $students = Student::find($id);
         $students -> status= true;
@@ -95,13 +100,11 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $student =new Student;
-
         request()->validate([
             'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $imageName = time().'.'.request()->picture->getClientOriginalExtension();
         request()->picture->move(public_path('/img_student/'), $imageName);
-        
         $student -> first_name = $request -> get('first_name');
         $student -> last_name = $request -> get('last_name');
         $student -> gender = $request -> get('gender');
@@ -137,7 +140,12 @@ class StudentController extends Controller
         return view('admin.viewSpecificStudent')->with('student',$student);
     }
 
-
+    /**
+     * Display the form update new picture
+     *
+     * @param  \App\Student  $id
+     * @return \Illuminate\Http\Request
+     */
     public function changePictureStudent( $id){
         $student = Student::find($id);
 
@@ -161,19 +169,11 @@ class StudentController extends Controller
     public function update(Request $request,$id)
     {
         $student = Student::find($id);
-
-        request()->validate([
-            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        $imageName = time().'.'.request()->picture->getClientOriginalExtension();
-        request()->picture->move(public_path('/img_student/'), $imageName);
-
         $student -> first_name = $request -> get('first_name');
         $student -> last_name = $request -> get('last_name');
         $student -> gender = $request -> get('gender');
         $student -> year = $request -> get('year');
         $student -> province = $request -> get('province');
-        $student -> picture = $imageName;
         $student -> student_id = $request -> get('student_id');
         $student ->  class = $request -> get('class');
         $student -> save();
@@ -193,5 +193,11 @@ class StudentController extends Controller
         $student = Student::find($id);
         $student -> delete();
         return back();
+    }
+
+    public function unserMentor(){
+        $students = Student::all()->where('user_id', Auth::id());
+        $count_students = Student::all()->where('user_id', Auth::id())->count();
+        return view('admin.underMantorStudent')->with(array('students'=>$students,'count_students'=>$count_students));
     }
 }
