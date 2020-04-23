@@ -227,7 +227,6 @@
         <!-- page content -->
         <div class="right_col" role="main">
           
-        </div>
   @else
   <body class="nav-md">
     <div class="container body">
@@ -433,7 +432,6 @@
         <!-- page content -->
         <div class="right_col" role="main">
           
-        </div>
   @endif
 
     <!-- jQuery -->
